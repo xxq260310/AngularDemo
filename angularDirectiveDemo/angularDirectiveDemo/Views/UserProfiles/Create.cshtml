@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+<h3>{{title}}</h3>
+<hr />
+<form role="form" style="max-width:500px;">
+    <strong class="error">{{ErrorMessage}}</strong>
+    <div class="form-group">
+        <label for="firstname">
+            First Name
+        </label>
+        <input type="text" class="form-control" id="firstname" ng-model="Employee.FirstName" />
+    </div>
+
+    <div class="form-group">
+        <label for="lastname">
+            Last Name:
+        </label>
+        <input type="text" class="form-control" id="lastname" ng-model="Employee.LastName" />
+    </div>
+
+    <div class="form-group">
+        <label for="country">
+            Country:
+        </label>
+        <select class="form-control" id="country" ng-model="Employee.Country" ng-options="c.Value as c.Text for c in countries" ng-change="States()">
+            <option value="">-- Select Country --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="state">
+            State:
+        </label>
+        <select class="form-control" id="state" ng-model="Employee.State" ng-disabled="!country2states" ng-options="s.Value as s.Text for s in country2states">
+            <option value="">-- Select State --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="dob">
+            Date of Birth:
+        </label>
+        <input type="date" class="form-control" id="birthdate" ng-model="Employee.BirthDate" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">
+            Description:
+        </label>
+        <textarea rows="5" cols="10" class="form-control" id="description" ng-model="Employee.Description"></textarea>
+    </div>
+
+    <div class="form-group checkbox">
+        <label>
+            <input type="checkbox" ng-model="Employee.IsActive" />Active
+        </label>
+    </div>
+
+    <a href="#/List" class="btn btn-info">Back to List</a>
+
+    <button class="btn btn-default" ng-click="save()">
+        Submit
+    </button>
+</form>

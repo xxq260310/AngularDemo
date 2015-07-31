@@ -1,0 +1,20 @@
+﻿@*<input type="text" ng-model="query" placeholder="Search..." />
+<table class="table">
+    <thead>
+        <tr><th colspan="4"></th></tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in list | filter: {{query}}">
+            <td>
+                {{user.EmployeeId}}
+            </td>
+            <td>{{user.FirstName}}</td>
+            <td>{{user.LastName}}</td>
+            <td>{{user.Country}}</td>
+            <td>{{user.State}}</td>
+            <td>{{user.IsActive}}</td>
+            <td>{{user.Description}}</td>
+            <td>{{user.BirthDate}}</td>
+        </tr>
+    </tbody>
+</table>*@

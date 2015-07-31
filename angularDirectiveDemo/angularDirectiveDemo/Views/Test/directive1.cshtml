@@ -1,0 +1,21 @@
+﻿<!doctype html>
+<html ng-app="MyAngular">
+<head>
+    <meta charset="utf-8">
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/Project/services/MyAngularService.js"></script>
+    <script src="~/Scripts/Project/Landing/Landing.js"></script>
+    <script src="~/Scripts/Project/directives/MyAngularDirective.js"></script>
+    <script src="~/Scripts/Project/controllers/MyAngularController.js"></script>
+</head>
+<body>
+    <div ng-controller="MyCtrl">
+        <loader howtoload="loadData()">滑动加载</loader>
+    </div>
+    <div ng-controller="MyCtrl2">
+        <loader howtoload="loadData2()">滑动加载</loader>
+    </div>
+    <input123123 type="button"/>Hi !
+</body>
+</html>

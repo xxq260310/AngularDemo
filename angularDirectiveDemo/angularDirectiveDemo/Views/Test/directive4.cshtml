@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html ng-app="MyAngular">
+<head>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/Project/services/MyAngularService.js"></script>
+    <script src="~/Scripts/Project/Landing/Landing.js"></script>
+    <script src="~/Scripts/Project/directives/MyAngularDirective.js"></script>
+    <script src="~/Scripts/Project/controllers/MyAngularController.js"></script>
+</head>
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Transclude
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="transcludeCtrl">
+                <transclude ng-hide="dialogIsHidden" on-click="hideDialog()">
+                    Check out the contents, {{name}}!
+                </transclude>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
