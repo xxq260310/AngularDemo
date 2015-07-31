@@ -33,6 +33,7 @@ namespace angularDirectiveDemo.Controllers
             return View();
         }
 
+
         public string GetCountries()
         {
             List<SelectListItem> countries = new List<SelectListItem> { 
@@ -42,8 +43,9 @@ namespace angularDirectiveDemo.Controllers
                 new SelectListItem { Text = "Australlia", Value="CA" }
             };
 
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            var obj = js.Serialize(countries);
+            //JavaScriptSerializer js = new JavaScriptSerializer();
+            //var obj = js.Serialize(countries);
+            string obj = Newtonsoft.Json.JsonConvert.SerializeObject(countries);
             return obj;
         }
 
