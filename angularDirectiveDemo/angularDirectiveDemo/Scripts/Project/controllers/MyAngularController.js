@@ -1,9 +1,9 @@
-﻿angular.module("myListController", []).controller("myListFactoryCtrl", function ($scope, myFactory) {
-    $scope.employees = {};
-    myFactory.getLists().success(function (data) {
-        $scope.employees = data;
-    });
-});
+﻿//angular.module("myListController", []).controller("myListFactoryCtrl", function ($scope, myFactory) {
+//    $scope.employees = {};
+//    myFactory.getLists().success(function (data) {
+//        $scope.employees = data;
+//    });
+//});
 
 var myController = angular.module("myListController", []);
 myController.controller("myListFactoryCtrl", function ($scope, myListService) {
@@ -45,7 +45,7 @@ myTransCludeCtrl.controller("transcludeCtrl", ["$scope", "$timeout", function ($
 
 //Edit controller
 var myEditCtrl = angular.module("myEditCtrl", []);
-myEditCtrl.controller("EditController", ["$scope", "$http", "myEditService", "$route", function ($scope, $http, myEditService, $route) {
+myEditCtrl.controller("EditController", ["$scope", "myEditService", "$route", function ($scope, myEditService, $route) {
     $scope.countries = {};
     myEditService.getCountries().success(function (data) {
         $scope.countries = data;
@@ -64,6 +64,7 @@ myEditCtrl.controller("EditController", ["$scope", "$http", "myEditService", "$r
         }
     };
 
+    //$routeParams.id;
     if ($route.current.params.id) {
         $scope.id = $route.current.params.id;
         $scope.title = "Edit Employee";
@@ -101,7 +102,7 @@ myEditCtrl.controller("EditController", ["$scope", "$http", "myEditService", "$r
 
 //Delete Ctrl
 var myDeleteCtrl = angular.module('myDeleteCtrl', []);
-myDeleteCtrl.controller("DeleteController", ["$scope", "$http", "myEditService", "$route", "myDeleteService", function ($scope, $http, myEditService, $route, myDeleteService) {
+myDeleteCtrl.controller("DeleteController", ["$scope", "myEditService", "$route", "myDeleteService", function ($scope, myEditService, $route, myDeleteService) {
     $scope.id = $route.current.params.id;
     myEditService.getSingleList($scope.id).success(function (data) {
         $scope.Employee = {
@@ -121,3 +122,83 @@ myDeleteCtrl.controller("DeleteController", ["$scope", "$http", "myEditService",
         });
     }
 }]);
+
+//share directive
+var scopeCtrl = angular.module("scopeModule", []);
+scopeCtrl.controller("ShareScopeController", function ($scope) {
+    $scope.name = "hello world";
+}).directive("shareDirective", function () {
+    return {
+        restrict: 'EA',
+        replace: false,
+        template: 'Say:{{name}}'
+    }
+});
+
+//isolate Directive
+scopeCtrl.controller("IsolateScopeController", function ($scope) {
+    $scope.name = "hello world";
+}).directive("isolateDirective", function () {
+    return {
+        restrict: 'EA',
+        scope: {},
+        template: 'Say:{{name}}'
+    }
+});
+
+//create isolate scope in directive
+scopeCtrl.run(function ($rootScope, $http) {
+
+}).controller("CreateIsolateScopeInDirectiveCtrl", function ($scope) {
+    $scope.user = {
+        id: 1,
+        name: "hello world"
+    };
+}).directive('createIsolateScopeInDirective', function () {
+    return {
+        scope: {},
+        template: 'Name: {{user.name}} Street: {{user.addr}}'
+    };
+});
+
+// @scope
+scopeCtrl.run(function ($rootScope, $http) { }).controller("PartialScope1Ctrl", function ($scope) {
+    $scope.name = "hello world";
+}).directive("partialScopeDirective1", function () {
+    return {
+        scope: {
+            name: "@",
+            template: 'Say：{{name}} <br>改变隔离scope的name：<input type="text" value="" ng-model="name"/>'
+        },
+    };
+});
+
+// =Scope
+scopeCtrl.run(function ($rootScope, $http) { }).controller("PartialScope2Ctrl", function ($scope) {
+    $scope.user = {
+        name: 'hello',
+        id: 1
+    };
+}).directive("partialScopeDirective2", function () {
+    return {
+        scope: {
+            user: "=",
+        },
+        template: 'Say：{{user.name}} <br>改变隔离scope的name：<input type="text" value="" ng-model="user.name"/>'
+    };
+});
+
+// &scope
+scopeCtrl.run(function ($rootScope, $http) { }).controller("PartialScope3Ctrl", function ($scope) {
+    $scope.value = "hello world";
+    $scope.click = function () {
+        $scope.value = Math.random;
+    };
+}).directive("partialScopeDirective3", function () {
+    return {
+        scope: {
+            action: "&"
+        },
+        template: '<input type="button" value="在directive中执行父scope定义的方法" ng-click="action()"/>'
+    };
+});

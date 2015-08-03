@@ -1,0 +1,17 @@
+﻿
+<div ng-controller="PartialScope1Ctrl">
+    <div class="result">
+        <div>
+            父scope：
+            <div>Say：{{name}}<br>改变父scope的name：<input type="text" value="" ng-model="name" /></div>
+        </div>
+        <div>
+            隔离scope：
+            <div partialscopedirective1 name="{{name}}"></div>
+        </div>
+        <div>
+            隔离scope（不使用{{name}}）：
+            <div partialscopedirective1 name="name"></div>
+        </div>
+    </div>
+</div>

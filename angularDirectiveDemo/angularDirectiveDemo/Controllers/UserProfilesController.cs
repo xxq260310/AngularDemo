@@ -49,9 +49,39 @@ namespace angularDirectiveDemo.Controllers
             return obj;
         }
 
+        public ActionResult ShareScope()
+        {
+            return View();
+        }
+
+        public ActionResult IsolateScope()
+        {
+            return View();
+        }
+
+        public ActionResult CreateIsolateScopeInDirective()
+        {
+            return View();
+        }
+
+        public ActionResult PartialScope1()
+        {
+            return View();
+        }
+
+        public ActionResult PartialScope2()
+        {
+            return View();
+        }
+
+        public ActionResult PartialScope3()
+        {
+            return View();
+        }
+
         public string GetStates(string id)
         {
-            List<SelectListItem> states = new List<System.Web.Mvc.SelectListItem>();
+            List<SelectListItem> states = new List<SelectListItem>();
             switch (id)
             {
                 case "IN":

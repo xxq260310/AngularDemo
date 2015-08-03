@@ -7,13 +7,14 @@
 //    return list;
 //});
 
-//Service
+//List Service
 var myServiceModule = angular.module("myServiceModule", []).service("myListService", function ($http) {
     this.getLists = function () {
         return $http.get('/UserProfiles/GetList');
     };
 });
 
+//Edit Or Create Service
 myServiceModule.service("myEditService", function ($http) {
     this.getSingleList = function (id) {
         return $http({
@@ -55,14 +56,5 @@ myServiceModule.service("myDeleteService",function ($http) {
     };
 });
 
-//myServiceModule.service("myCreateService", function ($http) {
-//    this.save = function (userProfile) {
-//        return $http.post("/UserProfiles/CreateConfirmed", $.params(userProfile), {
-//            headers: {
-//                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-//            }
-//        });
-//    };
-//});
 
 
