@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html ng-app="MyAngular">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Angular JS Demo
+            </div>
+        </div>
+        <div class="panel-body">
+            <div data-ng-init="name='Hello Xu xiaoqin'">
+                <span data-ng-bind="name"></span>
+            </div>
+            <div class="col-md-10" data-ng-init="quantity=1;cost=3;firstname='Xu';lastname='Xiaoqin';infoes=[1,2,3,4]">
+                <p>
+                    表达式:{{ 5 + 5}}
+                </p>
+                <p>
+                    Price:{{quantity * cost}}
+                </p>
+                <p>
+                    全称:{{firstname + " " + lastname}}
+                </p>
+                <p>
+                    序列:
+                    <span ng-repeat="iten in [0,1,2,3]">
+                        {{infoes[iten]}}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/Project/services/MyAngularService.js"></script>
+<script src="~/Scripts/Project/Landing/Landing.js"></script>
+<script src="~/Scripts/Project/directives/MyAngularDirective.js"></script>
+<script src="~/Scripts/Project/controllers/MyAngularController.js"></script>
+</html>

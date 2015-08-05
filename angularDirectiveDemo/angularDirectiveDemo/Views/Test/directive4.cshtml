@@ -1,4 +1,7 @@
-﻿<!doctype html>
+﻿@{
+    Layout = null;
+}
+<!doctype html>
 <html ng-app="MyAngular">
 <head>
     <meta charset="utf-8">
@@ -19,9 +22,70 @@
         </div>
         <div class="panel-body">
             <div ng-controller="transcludeCtrl">
-                <transclude ng-hide="dialogIsHidden" on-click="hideDialog()">
-                    Check out the contents, {{name}}!
+                <transclude ng-hide="dialogIsHidden" btnclick="hideDialog()">
+                    <br />
+                    <pre>
+<code>
+    秦时明月关，
+    醋和日当午
+</code>
+</pre>
                 </transclude>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div ng-controller="isolatescopectrl1">
+                <span ng-bind="definition"></span>
+                <div>
+                    <span>父scope：</span>
+                    <div><input type="text" class="form-control" ng-model="value" /></div>
+                </div>
+                <br />
+                <div>
+                    <span>隔离scope：</span>
+                    <div isolate1 toogle="click()"></div>  @*replace = true之后div消失*@
+                </div>
+            </div>
+
+            <br />
+
+            <div ng-controller="isolatescopectrl2">
+                <span ng-bind="definition"></span>
+                <div class="result">
+                    <div>
+                        <div>
+                            <span>父Scope:</span>
+                            <input type="text" ng-model="name" /> <br /> 改变隔离scope的name：
+                        </div>
+                    </div>
+                    <div>
+                        <span>隔离Scope:</span>
+                        <div isolate2 name="{{name}}">
+                        </div>
+                    </div>
+                    <div>
+                        <span>隔离Scope:</span>(不使用{{name}})
+                        <div isolate2 name="name"></div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div ng-controller="isolatescopectrl3">
+                <span ng-bind="definition"></span>
+                <div>
+                    <span>父Scope:</span>
+                    <div> {{user.name}} <br />改变父scope的name：<input type="text" ng-model="user.name" /></div>
+                </div>
+                <div>
+                    <span>隔离Scope:</span>(不使用 {{user}})：
+                    <div isolate3 user="user"></div>
+                </div>
+                <div>
+                    <span>隔离Scope:</span>(使用 {{user}})：
+                    <div isolate3 user="{{user}}"></div>
+                </div>
             </div>
         </div>
     </div>

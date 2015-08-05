@@ -16,16 +16,19 @@ namespace angularDirectiveDemo.Controllers
     {
         private EmployeeContext db = new EmployeeContext();
 
-        public JsonResult GetList()
+        public string GetList()
         {
             var list = this.db.UserProfiles.Select(x => x);
-            return this.Json(list, JsonRequestBehavior.AllowGet);
+            string obj = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+            return obj;
+            //return this.Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetSingleList(int? id)
+        public string GetSingleList(int? id)
         {
             UserProfile userProfile = db.UserProfiles.Find(id);
-            return this.Json(userProfile, JsonRequestBehavior.AllowGet);
+            string userProfiles = Newtonsoft.Json.JsonConvert.SerializeObject(userProfile);
+            return userProfiles;
         }
 
         public ActionResult List()

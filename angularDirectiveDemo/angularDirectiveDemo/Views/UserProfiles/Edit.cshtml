@@ -3,28 +3,40 @@
 }
 <h3>{{title}}</h3>
 <hr />
-<form role="form" style="max-width:500px;">
+<form novalidate name="EditForm">
     <strong class="error">{{ErrorMessage}}</strong>
-    <input type="hidden" id="employeeId" ng-model="Employee.EmployeeId"/>
+    <input type="hidden" id="employeeId" ng-model="Employee.EmployeeId" />
     <div class="form-group">
         <label for="firstname">
             First Name
         </label>
-        <input type="text" class="form-control" id="firstname" ng-model="Employee.FirstName" />
+        <input type="text" class="form-control" ng-model="Employee.FirstName" required name="firstname" ng-maxlength="3" />
+        <span style="color:red;" ng-show="EditForm.firstname.$dirty && EditForm.firstname.$invalid">
+            <span ng-show="EditForm.firstname.$error.required && EditForm.firstname.$touched">First Name is required!</span>
+            <span ng-show="EditForm.firstname.$error.maxlength && EditForm.firstname.$touched">
+                First Name length must less than or equals 3
+            </span>
+        </span>
     </div>
 
     <div class="form-group">
         <label for="lastname">
             Last Name:
         </label>
-        <input type="text" class="form-control" id="lastname" ng-model="Employee.LastName" />
+        <input type="text" class="form-control" name="lastname" ng-model="Employee.LastName" required ng-maxlength="10"/>
+        <span style="color:red;" ng-show="EditForm.lastname.$dirty && EditForm.lastname.$invalid">
+            <span ng-show="EditForm.lastname.$error.required && EditForm.lastname.$touched">First Name is required!</span>
+            <span ng-show="EditForm.lastname.$error.maxlength && EditForm.lastname.$touched">
+                First Name length must less than or equals 10
+            </span>
+        </span>
     </div>
 
     <div class="form-group">
         <label for="country">
             Country:
         </label>
-        <select class="form-control" id="country" ng-model="Employee.Country" ng-options="c.Value as c.Text for c in countries" ng-change="States()">
+        <select class="form-control" name="country" ng-model="Employee.Country" ng-options="c.Value as c.Text for c in countries" ng-change="States()">
             <option value="">-- Select Country --</option>
         </select>
     </div>
@@ -39,10 +51,13 @@
     </div>
 
     <div class="form-group">
-        <label for="dob">
+        <label for="BirthDate">
             Date of Birth:
         </label>
-        <input type="date" class="form-control" id="birthdate" ng-model="Employee.BirthDate" />
+        <input type="date" class="form-control" ng-model="Employee.BirthDate" name="birthdate" required/>
+        <span style="color:red;" ng-show="EditForm.birthdate.$dirty && EditForm.birthdate.$invalid">
+            <span ng-show="EditForm.birthdate.$error.required && EditForm.birthdate.$touched">Birth Date is required!</span>
+        </span>
     </div>
 
     <div class="form-group">
@@ -60,7 +75,15 @@
 
     <a href="#/List" class="btn btn-info">Back to List</a>
 
-    <button class="btn btn-default" ng-click="save()">
+    <button class="btn btn-primary" ng-click="reset()">
+        Reset
+    </button>
+    <button class="btn btn-default" ng-click="save()" 
+            ng-disabled="EditForm.firstname.$dirty && EditForm.firstname.$invalid || EditForm.lastname.$dirty && EditForm.lastname.$invalid || EditForm.birthdate.$dirty && EditForm.birthdate.$invalid">
         Submit
     </button>
+    <p>
+        <pre>form={{Employee | json}}</pre>
+        <pre>master={{master | json}}</pre>
+    </p>
 </form>
