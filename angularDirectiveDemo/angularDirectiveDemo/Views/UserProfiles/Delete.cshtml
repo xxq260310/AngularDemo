@@ -50,14 +50,14 @@
 
         <label class="control-label col-xs-3">
 
-            Country :
+            Province :
         </label>
 
         <div class="col-xs-9">
 
             <p class="form-control-static">
 
-                {{ Employee.Country }}
+                {{ Employee.Province }}
             </p>
 
         </div>
@@ -68,37 +68,41 @@
 
         <label class="control-label col-xs-3">
 
-            State :
+            City :
         </label>
 
         <div class="col-xs-9">
 
             <p class="form-control-static">
 
-                {{ Employee.State }}
+                {{ Employee.City }}
             </p>
 
         </div>
 
     </div>
 
-    @*<div class="form-group">
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            Town：
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">
+                {{ Employee.Town }}
+            </p>
+        </div>
+    </div>
 
-            <label class="control-label col-xs-3">
-
-                Salary :
-            </label>
-
-            <div class="col-xs-9">
-
-                <p class="form-control-static">
-
-                    {{ salary }}
-                </p>
-
-            </div>
-
-        </div>*@
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            Address：
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">
+                {{ Employee.Address }}
+            </p>
+        </div>
+    </div>
 
     <div class="form-group">
 
@@ -137,10 +141,13 @@
     </div>
 
     <div class="form-group">
+        <label class="control-label col-xs-3">
 
+            IsActive :
+        </label>
         <div class="col-xs-offset-3 col-xs-9">
 
-            <span class="label" ng-class="{true:'label-success', false:'label-danger', '':'hidden'}[active]">
+            <span class="label" ng-class="{true:'label-success', false:'label-danger'}[Employee.IsActive]">
 
                 {{ Employee.IsActive ? 'Active' : 'In Active' }}
             </span>
@@ -151,13 +158,15 @@
 
     <div class="form-group">
 
-        <div class="col-xs-offset-3 col-xs-9 text-center">
+        <div class="col-xs-offset-3 col-xs-9">
+            <div class="col-md-10">
+                <a href="#/List" class="btn btn-info">Back to List</a>
 
-            <a href="#/List" class="btn btn-info">Back to List</a>
+                <button type="submit" class="btn btn-primary" ng-click="delete()">
+                    Delete
+                </button>
+            </div>
 
-            <button type="submit" class="btn btn-primary" ng-click="delete()">
-                Delete
-            </button>
         </div>
     </div>
 

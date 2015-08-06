@@ -1,1 +1,163 @@
-﻿
+﻿@{
+    Layout = null;
+}
+<h3>
+    Employee Details
+</h3>
+
+<hr />
+
+<form class="form-horizontal">
+    <strong class="error">{{ErrorMessage}}</strong>
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            First Name :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.FirstName }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            Last Name :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.LastName }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            Province :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.Province }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            City :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.City }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            Town：
+        </label>
+        <p class="form-control-static">
+            {{ Employee.Town }}
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            Address：
+        </label>
+        <p class="form-control-static">
+            {{ Employee.Address }}
+        </p>
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            Date of Birth :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.BirthDate | date }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-xs-3">
+
+            Description :
+        </label>
+
+        <div class="col-xs-9">
+
+            <p class="form-control-static">
+
+                {{ Employee.Description }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+
+            IsActive :
+        </label>
+        <div class="col-xs-offset-3 col-xs-9">
+
+            <span class="label" ng-class="{true:'label-success', false:'label-danger', '':'hidden'}[Employee.IsActive]">
+                {{ Employee.IsActive ? 'Active' : 'In Active' }}
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-xs-offset-3 col-xs-9">
+
+            <a ng-href="#/List" class="btn btn-info">Back to List</a>
+
+            <a ng-href="#/UserProfiles/Edit/{{Employee.EmployeeId}}" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+
+</form>

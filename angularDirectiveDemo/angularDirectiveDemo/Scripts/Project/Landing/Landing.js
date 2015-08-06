@@ -1,10 +1,10 @@
 ﻿angular.module("MyAngular",
-    ["ngRoute", "myListController", "myServiceModule", "myDirectiveModule", "myDirectiveCtrl1", "myDirectiveCtrl2", "myEditCtrl", "myDeleteCtrl", "isolatescope2", "isolatescope1", "isolatescope3", "myTransCludeCtrl"])
+    ["ngRoute", "myListController", "myServiceModule", "myDirectiveModule", "myDirectiveCtrl1", "myDirectiveCtrl2", "myEditCtrl", "myDeleteCtrl", "isolatescope2", "isolatescope1", "isolatescope3", "myDetailsCtrl", "myTransCludeCtrl"])
     .config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $routeProvider.when("/UserProfiles/List", { templateUrl: "/UserProfiles/List", controller: "myListFactoryCtrl" })
         .when("/UserProfiles/Edit/:id", { templateUrl: function (params) { return '/UserProfiles/Edit/' + params.id }, controller: "EditController" })
         .when("/UserProfiles/Delete/:id", { templateUrl: function (params) { return '/UserProfiles/Delete/' + params.id }, controller: "DeleteController" })
-        .when("/UserProfiles/Details/:id", { templateUrl: "/UserProfiles/Details", controller: "myDetailsCtrl" })
+        .when("/UserProfiles/Details/:id", { templateUrl: function (params) { return '/UserProfiles/Details/' + params.id }, controller: "DetailsController" })
             .when("/UserProfiles/Create", { templateUrl: "/UserProfiles/Create", controller: "EditController" })
             .when("/UserProfiles/ShareScope", { templateUrl: "/UserProfiles/ShareScope", controller: "ShareScopeController" })
             .when("/UserProfiles/IsolateScope", { templateUrl: "/UserProfiles/IsolateScope", controller: "IsolateScopeController" })
@@ -17,11 +17,11 @@
             .when("/Test/directive3", { templateUrl: "/Test/directive3" })
             .when("/Test/directive4", { templateUrl: "/Test/directive4" })
             .when("/Test/templateUrl", { templateUrl: "/Test/templateUrl" })
-            .when("/Test/Test", { templateUrl: "/Test/Test"})
+            .when("/Test/Test", { templateUrl: "/Test/Test" })
         .otherwise({
             redirectTo: "/UserProfiles/List"
         })
 
-        $locationProvider.html5Mode(false);
+        //$locationProvider.html5Mode(true);
         //$locationProvider.html5Mode(true).hashPrefix('!');
     }]);

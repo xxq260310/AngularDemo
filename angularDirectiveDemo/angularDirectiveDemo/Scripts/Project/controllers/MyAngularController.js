@@ -67,25 +67,42 @@ angular.module("isolatescope3", []).controller("isolatescopectrl3", function ($s
 //Edit controller
 var myEditCtrl = angular.module("myEditCtrl", []);
 myEditCtrl.controller("EditController", ["$scope", "myEditService", "$route", function ($scope, myEditService, $route) {
-    $scope.countries = {};
-    myEditService.getCountries().success(function (data) {
-        $scope.countries = data;
+    $scope.provinces = {};
+    myEditService.getProvinces().success(function (data) {
+        $scope.provinces = data;
     });
 
-    $scope.country2states = {};
-    $scope.States = function () {
-        var country = $scope.Employee.Country;
-        if (country) {
-            myEditService.getStates(country).success(function (data) {
-                $scope.country2states = data;
+    $scope.province2cities = {};
+    $scope.Cities = function () {
+        var province = $scope.Employee.Province;
+        if (province) {
+            myEditService.getCities(province).success(function (data) {
+                $scope.province2cities = data;
             });
         }
         else {
-            $scope.country2states = null;
+            $scope.province2cities = null;
         }
     };
 
-    //$routeParams.id;
+    $scope.city2towns = {};
+    $scope.Towns = function () {
+        var city = $scope.Employee.City;
+        var province = $scope.Employee.Province;
+        if (city) {
+            var pvm = {
+                City: city,
+                Province: province
+            };
+            myEditService.getTowns(pvm).success(function (data) {
+                $scope.city2towns = data;
+            });
+        }
+        else {
+            $scope.city2towns = null;
+        }
+    };
+
     if ($route.current.params.id) {
         $scope.id = $route.current.params.id;
         $scope.title = "Edit Employee";
@@ -93,15 +110,18 @@ myEditCtrl.controller("EditController", ["$scope", "myEditService", "$route", fu
             $scope.Employee = {
                 FirstName: data.FirstName,
                 LastName: data.LastName,
-                Country: data.Country,
-                State: data.State,
+                Province: data.Province,
+                Town: data.Town,
+                Address: data.Address,
+                City: data.City,
                 IsActive: data.IsActive,
                 Description: data.Description,
                 BirthDate: new Date(data.BirthDate),
                 EmployeeId: data.EmployeeId
             };
-            $scope.States();
-            $scope.master = angular.copy($scope.Employee);
+            $scope.copy = angular.copy($scope.Employee);
+            $scope.Cities();
+            $scope.Towns();
         }).error(function (data) {
             $scope.ErrorMessage = "An error has occured while getting edit list!" + data.ExceptionMessage;
         });
@@ -111,7 +131,9 @@ myEditCtrl.controller("EditController", ["$scope", "myEditService", "$route", fu
     }
 
     $scope.reset = function () {
-        $scope.Employee = angular.copy($scope.master);
+        $scope.Employee = angular.copy($scope.copy);
+        $scope.Cities();
+        $scope.Towns();
     };
 
     $scope.save = function () {
@@ -119,11 +141,13 @@ myEditCtrl.controller("EditController", ["$scope", "myEditService", "$route", fu
             EmployeeId: $scope.Employee.EmployeeId,
             FirstName: $scope.Employee.FirstName,
             LastName: $scope.Employee.LastName,
-            Country: $scope.Employee.Country,
-            State: $scope.Employee.State,
+            Province: $scope.Employee.Province,
+            City: $scope.Employee.City,
+            Town: $scope.Employee.Town,
+            Address: $scope.Employee.Address,
             IsActive: $scope.Employee.IsActive,
             Description: $scope.Employee.Description,
-            BirthDate: new Date($scope.Employee.BirthDate),
+            BirthDate: new Date($scope.Employee.BirthDate).toDateString(),
         };
         myEditService.save(userProfile).success(function () {
             window.location.href = "/#/UserProfiles/List";
@@ -149,6 +173,17 @@ myDeleteCtrl.controller("DeleteController", ["$scope", "myEditService", "$route"
             window.location.href = "/#/UserProfiles/List";
         });
     }
+}]);
+
+//Details Ctrl
+var myDetailsCtrl = angular.module("myDetailsCtrl", []);
+myDeleteCtrl.controller("DetailsController", ["$scope", "myEditService", "$route", function ($scope, myEditService, $route) {
+    $scope.id = $route.current.params.id;
+    myEditService.getSingleList($scope.id).success(function (data) {
+        $scope.Employee = data;
+    }).error(function (data) {
+        $scope.ErrorMessage = "An error has occured while deleting customer!" + data.ExceptionMessage;
+    });
 }]);
 
 ////share directive

@@ -17,9 +17,13 @@ namespace angularDirectiveDemo.Models
         [StringLength(20)]
         public string LastName { get; set; }
 
-        public string Country { get; set; }
+        public string Province { get; set; }
 
-        public string State { get; set; }
+        public string City { get; set; }
+
+        public string Town { get; set; }
+
+        public string Address { get; set; }
 
         public Nullable<bool> IsActive { get; set; }
 

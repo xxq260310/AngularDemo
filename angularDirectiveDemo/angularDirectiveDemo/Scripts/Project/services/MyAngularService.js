@@ -29,32 +29,39 @@ myServiceModule.service("myEditService", function ($http) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
-        })
+        });
     };
 
-    this.getCountries = function () {
-        return $http.get("/UserProfiles/GetCountries");
+    this.getProvinces = function () {
+        return $http.get("/UserProfiles/GetProvinces");
     };
 
-    this.getStates = function (country) {
+    this.getCities = function (province) {
         return $http({
             method: 'get',
-            url: '/UserProfiles/GetStates',
-            params: { id: country }
+            url: '/UserProfiles/GetCities',
+            params: { id: province }
+        });
+    };
+    this.getTowns = function (pvm) {
+        return $http.post("/UserProfiles/GetTowns", $.param(pvm), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
         });
     };
 });
 
-myServiceModule.service("myDeleteService",function ($http) {
+myServiceModule.service("myDeleteService", function ($http) {
     this.delete = function (id) {
-        //return $http.post("/UserProfiles/DeleteConfirmed", $.param(id));
         return $http({
             method: 'post',
             url: '/userProfiles/DeleteConfirmed',
-            params: { id : id}
+            params: { id: id }
         });
     };
 });
+
 
 
 
