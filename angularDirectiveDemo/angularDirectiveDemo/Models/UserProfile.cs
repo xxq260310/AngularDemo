@@ -11,10 +11,8 @@ namespace angularDirectiveDemo.Models
         [Key]
         public int EmployeeId { get; set; }
 
-        [StringLength(20)]
         public string FirstName { get; set; }
 
-        [StringLength(20)]
         public string LastName { get; set; }
 
         public string Province { get; set; }
@@ -27,7 +25,6 @@ namespace angularDirectiveDemo.Models
 
         public Nullable<bool> IsActive { get; set; }
 
-        [StringLength(100)]
         public string Description { get; set; }
 
         [DataType(DataType.DateTime)]

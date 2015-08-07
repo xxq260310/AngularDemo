@@ -23,7 +23,7 @@
         <label for="lastname">
             Last Name:
         </label>
-        <input type="text" class="form-control" name="lastname" ng-model="Employee.LastName" required ng-maxlength="10"/>
+        <input type="text" class="form-control" name="lastname" ng-model="Employee.LastName" required ng-maxlength="10" />
         <span style="color:red;" ng-show="EditForm.lastname.$dirty && EditForm.lastname.$invalid">
             <span ng-show="EditForm.lastname.$error.required && EditForm.lastname.$touched">First Name is required!</span>
             <span ng-show="EditForm.lastname.$error.maxlength && EditForm.lastname.$touched">
@@ -60,16 +60,6 @@
     </div>
 
     <div class="form-group">
-        <label for="BirthDate">
-            Date of Birth:
-        </label>
-        <input type="date" class="form-control" ng-model="Employee.BirthDate" name="birthdate" required/>
-        <span style="color:red;" ng-show="EditForm.birthdate.$dirty && EditForm.birthdate.$invalid">
-            <span ng-show="EditForm.birthdate.$error.required && EditForm.birthdate.$touched">Birth Date is required!</span>
-        </span>
-    </div>
-
-    <div class="form-group">
         <label for="address">
             Address:
         </label>
@@ -77,10 +67,25 @@
     </div>
 
     <div class="form-group">
+        <label for="BirthDate">
+            Date of Birth:
+        </label>
+        <input type="date" class="form-control" ng-model="Employee.BirthDate" name="birthdate" required />
+        <span style="color:red;" ng-show="EditForm.birthdate.$dirty && EditForm.birthdate.$invalid">
+            <span ng-show="EditForm.birthdate.$error.required && EditForm.birthdate.$touched">Birth Date is required!</span>
+        </span>
+    </div>
+
+    <div class="form-group">
         <label for="description">
             Description:
         </label>
-        <textarea rows="5" cols="10" class="form-control" name="description" ng-model="Employee.Description"></textarea>
+        <textarea rows="5" cols="10" class="form-control" name="description" ng-model="Employee.Description" ng-maxlength="500"></textarea>
+        <span style="color:red;" ng-show="EditForm.description.$dirty && EditForm.description.$invalid">
+            <span ng-show="EditForm.description.$error.maxlength && EditForm.description.$error.$touched">
+                The Description length must less than 500.
+            </span>
+        </span>
     </div>
 
     <div class="form-group checkbox">
@@ -89,12 +94,12 @@
         </label>
     </div>
 
-    <a ng-href="#/List" class="btn btn-info">Back to List</a>
+    <a ng-href="#/List" class="btn btn-info btn-lg">Back to List</a>
 
-    <button class="btn btn-primary" ng-click="reset()">
+    <button class="btn btn-primary btn-lg" ng-click="reset()">
         Reset
     </button>
-    <button class="btn btn-default" ng-click="save()" 
+    <button class="btn btn-default btn-lg" ng-click="save()" 
             ng-disabled="EditForm.$invalid">
         Submit
     </button>

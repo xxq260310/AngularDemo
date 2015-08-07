@@ -960,12 +960,6 @@
     <Content Include="Views\Test\transclude_part.cshtml" />
     <Content Include="Views\Test\templateUrl.cshtml" />
     <Content Include="Views\UserProfiles\List.cshtml" />
-    <Content Include="Views\UserProfiles\IsolateScope.cshtml" />
-    <Content Include="Views\UserProfiles\PartialScope2.cshtml" />
-    <Content Include="Views\UserProfiles\PartialScope3.cshtml" />
-    <Content Include="Views\UserProfiles\PartialScope1.cshtml" />
-    <Content Include="Views\UserProfiles\ShareScope.cshtml" />
-    <Content Include="Views\UserProfiles\CreateIsolateScopeInDirective.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

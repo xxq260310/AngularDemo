@@ -22,7 +22,6 @@ namespace angularDirectiveDemo.Controllers
             var list = this.db.UserProfiles.Select(x => x);
             string obj = Newtonsoft.Json.JsonConvert.SerializeObject(list);
             return obj;
-            //return this.Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public string GetSingleList(int? id)
@@ -46,9 +45,6 @@ namespace angularDirectiveDemo.Controllers
                 new SelectListItem { Text = "上海", Value="上海" },
                 new SelectListItem { Text = "重庆", Value="重庆" }
             };
-
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //var obj = js.Serialize(countries);
             string obj = Newtonsoft.Json.JsonConvert.SerializeObject(provinces);
             return obj;
         }
@@ -152,7 +148,7 @@ namespace angularDirectiveDemo.Controllers
         // GET: UserProfiles
         public ActionResult Index()
         {
-            return View(db.UserProfiles.ToList());
+            return View();
         }
 
         // GET: UserProfiles/Details/5

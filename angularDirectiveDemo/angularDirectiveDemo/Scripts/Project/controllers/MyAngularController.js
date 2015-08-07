@@ -265,3 +265,43 @@ myDeleteCtrl.controller("DetailsController", ["$scope", "myEditService", "$route
 //        template: '<input type="button" value="在directive中执行父scope定义的方法" ng-click="action()"/>'
 //    };
 //});
+
+//
+var filter = angular.module("filterCtrlModule", []).controller("filtercontroller", ["$scope", function ($scope) {
+    $scope.count = 1.1;
+    $scope.amount = 13212.123;
+    $scope.currentdate = 20111111;
+}]);
+
+angular.module('limitToExample', [])
+  .controller('limitToExampleController', ['$scope', function ($scope) {
+      $scope.numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      $scope.letters = "abcdefghi";
+      $scope.longNumber = 2345432342;
+      $scope.numLimit = 3;
+      $scope.letterLimit = 3;
+      $scope.longNumberLimit = 3;
+  }]);
+
+angular.module('orderByExample', [])
+   .controller('orderByExampleController', ['$scope', function ($scope) {
+       $scope.friends =
+           [{ name: 'John', phone: '555-1212', age: 10 },
+            { name: 'Mary', phone: '555-9876', age: 19 },
+            { name: 'Mike', phone: '555-4321', age: 21 },
+            { name: 'Adam', phone: '555-5678', age: 35 },
+            { name: 'Julie', phone: '555-8765', age: 29 }];
+       $scope.predicate = '-age';
+   }]);
+
+angular.module('selectExample', [])
+  .controller('selectExampleController', ['$scope', function ($scope) {
+      $scope.colors = [
+        { name: 'black', shade: 'dark' , id : 1},
+        { name: 'white', shade: 'light' , id : 2},
+        { name: 'red', shade: 'dark' , id : 3},
+        { name: 'blue', shade: 'dark' , id : 4},
+        { name: 'yellow', shade: 'light' , id : 5}
+      ];
+      $scope.myColor = $scope.colors[2]; // red
+  }]);
