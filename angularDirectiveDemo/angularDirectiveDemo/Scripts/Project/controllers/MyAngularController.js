@@ -297,11 +297,72 @@ angular.module('orderByExample', [])
 angular.module('selectExample', [])
   .controller('selectExampleController', ['$scope', function ($scope) {
       $scope.colors = [
-        { name: 'black', shade: 'dark' , id : 1},
-        { name: 'white', shade: 'light' , id : 2},
-        { name: 'red', shade: 'dark' , id : 3},
-        { name: 'blue', shade: 'dark' , id : 4},
-        { name: 'yellow', shade: 'light' , id : 5}
+        { name: 'black', shade: 'dark', id: 1 },
+        { name: 'white', shade: 'light', id: 2 },
+        { name: 'red', shade: 'dark', id: 3 },
+        { name: 'blue', shade: 'dark', id: 4 },
+        { name: 'yellow', shade: 'light', id: 5 }
       ];
       $scope.myColor = $scope.colors[2]; // red
   }]);
+
+angular.module('equalExample', [])
+.controller('equalExampleController', ['$scope', function ($scope) {
+    $scope.aaaaa = {
+        Obj1: '1',
+        Obj2: '1'
+    },
+    $scope.IsEqual = false;
+    $scope.state = "";
+    $scope.compare = function () {
+        if (angular.equals($scope.aaaaa.Obj1, $scope.aaaaa.Obj2)) {
+            $scope.IsEqual = true;
+            $scope.state = "success";
+        }
+        else {
+            $scope.IsEqual = false;
+            $scope.state = "failure";
+        }
+    };
+}]);
+
+angular.module('extendExample', [])
+.controller('extendExampleController', ["$scope", function ($scope) {
+    $scope.src = { name: 'xxx', country: 'china', user: { userName: 'aaa', userAge: 11}};
+    $scope.dst = { name: 'yyy', age: 20 };
+    $scope.extend = function () {
+        angular.extend($scope.dst, $scope.src);
+    };
+}]);
+
+angular.module('foreachExample', [])
+.controller("foreachExampleController", ["$scope", function ($scope) {
+    $scope.log = [];
+    var obj = { name: 'xxx', country: 'china' };
+    angular.forEach(obj, function (value, key) {
+        $scope.name = key;
+        $scope.country = value;
+    });
+}]);
+
+angular.module('fromjsonExample', [])
+.controller('fromjsonExampleController', ["$scope", function ($scope) {
+    $scope.jsonToString = angular.fromJson('{"name": "xxx", "age": 34}');
+}]);
+
+angular.module('tojsonExample', [])
+.controller('tojsonExampleController', ["$scope", function ($scope) {
+    $scope.stringToJson = angular.toJson("aaaa,11111", true);
+}]);
+
+angular.module('identityExample', [])
+.controller('identityExampleController', ["$scope", function ($scope) {
+    $scope.firstArg = angular.identity('1111','2222', '3333');
+}]);
+
+angular.module('isArrayExample', []).controller('isArrayExampleController', ["$scope", function ($scope) {
+    $scope.a = angular.isArray(3);
+    $scope.b = angular.isArray([]);
+    $scope.c = angular.isArray([3, 1]);
+    $scope.d = angular.isArray({ name: '11111' });
+}]);

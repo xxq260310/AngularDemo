@@ -26,6 +26,16 @@ namespace angularDirectiveDemo
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/Project/Landing.js", 
+                "~/Scripts/angular.js",
+                "~/Scripts/Project/controllers/MyAngularController.js",
+                "~/Scripts/Project/services/MyAngularService.js",
+                "~/Scripts/Project/directives/MyAngularDirective.js",
+                "~/Scripts/angular-route.js"));
+              
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

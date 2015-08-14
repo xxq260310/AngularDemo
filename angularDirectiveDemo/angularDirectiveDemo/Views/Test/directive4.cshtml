@@ -1,78 +1,65 @@
 ﻿@{
     Layout = null;
 }
-<!doctype html>
-<html ng-app="MyAngular">
-<head>
-    <meta charset="utf-8">
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.js"></script>
-    <script src="~/Scripts/Project/services/MyAngularService.js"></script>
-    <script src="~/Scripts/Project/Landing/Landing.js"></script>
-    <script src="~/Scripts/Project/directives/MyAngularDirective.js"></script>
-    <script src="~/Scripts/Project/controllers/MyAngularController.js"></script>
-</head>
-<body>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <div class="panel-title">
-                Transclude
-            </div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Transclude
         </div>
-        <div class="panel-body">
-            <div ng-controller="transcludeCtrl">
-                <transclude ng-hide="dialogIsHidden" btnclick="hideDialog()">
-                    <br />
-                    <pre>
+    </div>
+    <div class="panel-body">
+        <div ng-controller="transcludeCtrl">
+            <transclude ng-hide="dialogIsHidden" btnclick="hideDialog()">
+                <br />
+                <pre>
 <code>
     秦时明月关，
     醋和日当午
 </code>
 </pre>
-                </transclude>
+            </transclude>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div ng-controller="isolatescopectrl1">
+            <span ng-bind="definition"></span>
+            <div>
+                <span>父scope：</span>
+                <div><input type="text" class="form-control" ng-model="value" /></div>
+            </div>
+            <div>
+                <span>隔离scope：</span>
+                <div isolate1 toogle="click()"></div>  @*replace = true之后div消失*@
             </div>
         </div>
 
-        <div class="panel-body">
-            <div ng-controller="isolatescopectrl1">
-                <span ng-bind="definition"></span>
+        <br />
+
+        <div ng-controller="isolatescopectrl2">
+            <span ng-bind="definition"></span>
+            <div class="result">
                 <div>
-                    <span>父scope：</span>
-                    <div><input type="text" class="form-control" ng-model="value" /></div>
+                    <div>
+                        <span>父Scope:</span>
+                        <input type="text" ng-model="name" /> <br /> 改变隔离scope的name：
+                    </div>
                 </div>
-                <br />
                 <div>
-                    <span>隔离scope：</span>
-                    <div isolate1 toogle="click()"></div>  @*replace = true之后div消失*@
+                    <span>隔离Scope:</span>
+                    <div isolate2 name="{{name}}">
+                    </div>
+                </div>
+                <div>
+                    <span>隔离Scope:</span>(不使用{{name}})
+                    <div isolate2 name="name"></div>
                 </div>
             </div>
+        </div>
+        <br />
 
-            <br />
-
-            <div ng-controller="isolatescopectrl2">
-                <span ng-bind="definition"></span>
-                <div class="result">
-                    <div>
-                        <div>
-                            <span>父Scope:</span>
-                            <input type="text" ng-model="name" /> <br /> 改变隔离scope的name：
-                        </div>
-                    </div>
-                    <div>
-                        <span>隔离Scope:</span>
-                        <div isolate2 name="{{name}}">
-                        </div>
-                    </div>
-                    <div>
-                        <span>隔离Scope:</span>(不使用{{name}})
-                        <div isolate2 name="name"></div>
-                    </div>
-                </div>
-            </div>
-            <br />
-
-            <div ng-controller="isolatescopectrl3">
+        @*<div ng-controller="isolatescopectrl3">
                 <span ng-bind="definition"></span>
                 <div>
                     <span>父Scope:</span>
@@ -86,8 +73,84 @@
                     <span>隔离Scope:</span>(使用 {{user}})：
                     <div isolate3 user="{{user}}"></div>
                 </div>
+            </div>*@
+
+        <br />
+        <div ng-controller="equalExampleController">
+            <input type="text" ng-model="aaaaa.Obj1" class="form-control" />
+            <input type="text" ng-model="aaaaa.Obj2" class="form-control" />
+            <input type="button" ng-click="compare()" value="Compare" />
+            <span ng-class="{true: 'label-success', false: 'label-danger'}[IsEqual]">
+                {{state}}
+            </span>
+        </div>
+        <br />
+        <div ng-controller="extendExampleController">
+            src:
+            <pre>
+            name:<span ng-bind="src.name"></span> &nbsp;
+            country:<span ng-bind="src.country"></span> &nbsp;
+            userName:<span ng-bind="src.user.userName"></span> &nbsp;
+            userAge: <span ng-bind="src.user.userAge"></span>
+            </pre>
+
+            <br />
+            dest:
+            <pre>
+            name:<span ng-bind="dst.name"></span>&nbsp;
+            country:<span ng-bind="dst.country"></span>&nbsp;
+            age:<span ng-bind="dst.age"></span>
+            userName:<span ng-bind="dst.user.userName"></span> &nbsp;
+            UserAge: <span ng-bind="dst.user.userAge"></span></pre>
+
+            <br />
+            <input type="button" ng-click="extend()" value="Extend" />
+        </div>
+        <br />
+        <h2>for each</h2>
+        <div ng-controller="foreachExampleController">
+            name: <span>{{name}}</span>
+            country: <span>{{country}}</span>
+        </div>
+        <br />
+        <h2>
+            fromjson
+        </h2>
+        <div ng-controller="fromjsonExampleController">
+            <pre>{{jsonToString}}</pre>
+        </div>
+        <br />
+        <h2>
+            tojson
+        </h2>
+        <div ng-controller="tojsonExampleController">
+            <pre>{{stringToJson}}</pre>
+        </div>
+        <br />
+        <h2>
+            Identity(Get the first param)
+        </h2>
+        <div ng-controller="identityExampleController">
+            First Param:<span ng-bind="firstArg"></span>
+        </div>
+        <br />
+        <h2>
+            isArray
+        </h2>
+        <div ng-controller="isArrayExampleController">
+            <div ng-class="{true: 'label-success', false: 'label-danger'}[a]">
+                qweqw
+            </div>
+            <div ng-class="{true: 'label-success', false: 'label-danger'}[b]">
+                qweqw
+            </div>
+            <div ng-class="{true: 'label-success', false: 'label-danger'}[c]">
+                qweqw
+            </div>
+            <div ng-class="{true: 'label-success', false: 'label-danger'}[d]">
+                qweqw
             </div>
         </div>
+        <br />
     </div>
-</body>
-</html>
+</div>

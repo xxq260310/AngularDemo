@@ -1,7 +1,9 @@
-﻿var userInfoModule = angular.module("UserInfoModule", []);
+﻿routeApp.controller("examplecontroller1", ["$scope", function ($scope) {
+    $scope.counter = 0;
+}]);
 
-userInfoModule.controller("UserInfoCtrl", ["$scope", function ($scope) {
-    $scope.userInfo = {
+routeApp.controller("examplecontroller", ["$scope", function ($scope) {
+    $scope.fake = $scope.userInfo = {
         email: "1032978743@qq.com",
         password: "1111111",
         autologin: true
@@ -20,10 +22,6 @@ userInfoModule.controller("UserInfoCtrl", ["$scope", function ($scope) {
     };
 
     $scope.resetForm = function () {
-        $scope.userInfo = {
-            email: "1032978743@qq.com",
-            password: "1111111",
-            autologin: true
-        };
+        $scope.userInfo = angular.copy($scope.fake);
     };
 }]);
